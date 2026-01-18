@@ -1,0 +1,189 @@
+                              <!-- /* ==========================================================================                                                                                          
+                                         Copyright © 2026 Nguyen Manh Tuan. All rights reserved.
+                                ======================================================================= */ -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNI FOOD - Hệ Thống Giao Đồ Ăn Chuyên Nghiệp Toàn Quốc</title>
+    <link href="https://fonts.googleapis.com/css?family=Inter:400,500,600,700,800,900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link rel="stylesheet" href="./css/Trangphu.css" />    
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo-section">
+            <h2>UNI FOOD</h2>
+        </div>
+        <div class="back-btn-container">
+            <a href="TrangChu.html" class="btn-back-home">
+                <i class="fa-solid fa-house-chimney"></i>
+                <span>TRỞ VỀ</span>
+            </a>
+        </div>
+        <ul class="menu-wrapper">
+            <li class="menu-category" onclick="toggleAccordion(this)">
+                <div class="menu-trigger">
+                    <i class="fa-solid fa-compass"></i>
+                    <span>Khám phá</span>
+                    <i class="fa-solid fa-chevron-right chevron-icon"></i>
+                </div>
+                <ul class="submenu-list">
+                    <li>Bộ sưu tập mới</li>
+                    <li>Nhà hàng nổi bật</li>
+                    <li>Món ngon mỗi ngày</li>
+                    <li>Top trending</li>
+                </ul>
+            </li>
+            <li class="menu-category" onclick="toggleAccordion(this)">
+                <div class="menu-trigger">
+                    <i class="fa-solid fa-box-archive"></i>
+                    <span>Đơn hàng</span>
+                    <i class="fa-solid fa-chevron-right chevron-icon"></i>
+                </div>
+                <ul class="submenu-list">
+                    <li>Đơn đang giao</li>
+                    <li>Lịch sử đơn hàng</li>
+                    <li>Đơn nháp</li>
+                    <li>Khiếu nại dịch vụ</li>
+                </ul>
+            </li>
+            <li class="menu-category" onclick="toggleAccordion(this)">
+                <div class="menu-trigger">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Ví của tôi</span>
+                    <i class="fa-solid fa-chevron-right chevron-icon"></i>
+                </div>
+                <ul class="submenu-list">
+                    <li>Số dư UniPay</li>
+                    <li>Liên kết ngân hàng</li>
+                    <li>Ưu đãi nạp tiền</li>
+                </ul>
+            </li>
+            <li class="menu-category" onclick="toggleAccordion(this)">
+                <div class="menu-trigger">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Thông báo</span>
+                    <i class="fa-solid fa-chevron-right chevron-icon"></i>
+                </div>
+                <ul class="submenu-list">
+                    <li>Tin khuyến mãi</li>
+                    <li>Cập nhật đơn hàng</li>
+                    <li>Thông báo hệ thống</li>
+                </ul>
+            </li>
+            <li class="menu-category">
+                <div class="menu-trigger">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <span>Tài khoản</span>
+                </div>
+            </li>
+            <li class="menu-category">
+                <div class="menu-trigger">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span>Trợ giúp</span>
+                </div>
+            </li>
+        </ul>
+    </aside>
+    <main class="main-content">
+        <div class="container-wrapper">
+            <section class="top-promotion-grid">
+                <div class="promo-card-item v-orange">
+                    <div class="v-ico"><i class="fa-solid fa-ticket"></i></div>
+                    <div class="promo-text">
+                        <h4>Mã: UNIFREE</h4>
+                        <p>Freeship cho đơn hàng từ 150K</p>
+                    </div>
+                </div>
+                <div class="promo-card-item v-red">
+                    <div class="v-ico"><i class="fa-solid fa-gift"></i></div>
+                    <div class="promo-text">
+                        <h4>Giảm 50%</h4>
+                        <p>Khách hàng mới trải nghiệm</p>
+                    </div>
+                </div>
+                <div class="promo-card-item v-blue">
+                    <div class="v-ico"><i class="fa-solid fa-users"></i></div>
+                    <div class="promo-text">
+                        <h4>Team Work</h4>
+                        <p>Giảm 70K cho nhóm từ 4 người</p>
+                    </div>
+                </div>
+            </section>
+            <nav class="navigation-filter">
+                <div class="filter-tabs">
+                    <div class="tab-trigger active" onclick="applyFilter('all', this)">Mới nhất</div>
+                    <div class="tab-trigger" onclick="applyFilter('near', this)">Gần tôi</div> 
+                    <div class="tab-trigger" onclick="applyFilter('fav', this)">Đã lưu</div>
+                </div>
+                <div class="dropdown-control">
+                    <select id="provinceSelector">
+                        <option value="0">Tất cả Tỉnh/Thành phố</option>
+                    </select>
+                </div>
+            </nav>
+            <div class="food-items-grid" id="mainFoodGrid">
+            </div>
+            <div class="load-more-section">
+                <div id="ui-loader-spin">
+                    <i class="fa-solid fa-circle-notch fa-spin"></i>
+                </div>
+                <button class="btn-infinite-load" onclick="handleLoadMore()" id="btnInfinite">
+                    <span>XEM THÊM</span>
+                    <i class="fa-solid fa-rotate"></i>
+                </button>
+            </div>
+        </div>
+        <footer class="footer-premium">
+            <div class="footer-content">
+                <div class="stats-summary-grid">
+                    <div><span class="stat-val">334K+</span><span class="stat-desc">Địa điểm toàn quốc</span></div>
+                    <div><span class="stat-val">38.6M+</span><span class="stat-desc">Người dùng tin dùng</span></div>
+                    <div><span class="stat-val">1.4M+</span><span class="stat-desc">Đánh giá thực tế</span></div>
+                    <div><span class="stat-val">10M+</span><span class="stat-desc">Hình ảnh món ăn</span></div>
+                </div>
+                <div class="footer-links-grid">
+                    <div>
+                        <h3 class="footer-col-title">Khám phá</h3>
+                        <ul class="footer-list">
+                            <li><a href="#">Ứng dụng di động</a></li>
+                            <li><a href="#">Tạo bộ sưu tập</a></li>
+                            <li><a href="#">Bảo mật thông tin</a></li>
+                            <li><a href="#">Quy định sử dụng</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="footer-col-title">Về Công Ty</h3>
+                        <ul class="footer-list">
+                            <li><a href="#">Giới thiệu</a></li>
+                            <li><a href="#">Trợ giúp khách hàng</a></li>
+                            <li><a href="#">Cơ hội việc làm</a></li>
+                            <li><a href="#">Liên hệ truyền thông</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="footer-col-title">Tham gia với chúng tôi</h3>
+                        <ul class="footer-list">
+                            <li><a href="#">Facebook Fanpage</a></li>
+                            <li><a href="#">Instagram Official</a></li>
+                            <li><a href="#">Kênh Youtube</a></li>
+                            <li><a href="#">TikTok Food</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="footer-col-title">Giấy phép hoạt động</h3>
+                        <p style="font-size:12px; color:#718096; line-height: 1.8;">MXH 363/GP-BTTTT cấp bởi Bộ Thông Tin và Truyền Thông.</p>
+                        <div class="registered-box">ĐÃ ĐĂNG KÝ BỘ CÔNG THƯƠNG</div>
+                    </div>
+                </div>
+
+                <p class="copyright-tag">© 2026 UNI FOOD CORPORATION. ALL RIGHTS RESERVED. POWERED BY UNI UI TEAM.</p>
+            </div>
+        </footer>
+    </main>
+    <script src="./js/Trangphu.js"></script>
+
+</body>
+</html>

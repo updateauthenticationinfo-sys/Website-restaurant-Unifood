@@ -1,0 +1,843 @@
+                         /* ==========================================================================                                                                                          
+                                       Copyright © 2026 Nguyen Manh Tuan. All rights reserved.
+                            ======================================================================= */
+:root {
+    --accent-cyan: #00d2ff;
+    --accent-orange: #ffa502;
+    --bg-body: #f4f7f9;
+    --deep-navy: #0a192f;
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --light-blue: #e6f1ff;
+    --luxury-gold: #c5a059;
+    --primary-blue: #0062a4;
+    --primary-color: #0062a4;
+    --primary-light: #e8f1f8;
+    --radius-item: 16px;
+    --radius-lg: 30px;
+    --radius-main: 24px;
+    --radius-md: 15px;
+    --red-accent: #ee4d2d;
+    --secondary-color: #cf2127;
+    --shadow-blue: 0 8px 20px rgba(0, 98, 164, 0.25);
+    --shadow-card: 0 10px 25px rgba(0, 0, 0, 0.05);
+    --shadow-hard: 0 20px 50px rgba(10, 25, 47, 0.15);
+    --shadow-hover: 0 20px 45px rgba(0, 0, 0, 0.12);
+    --shadow-soft: 0 10px 30px rgba(0, 98, 164, 0.1);
+    --sidebar-width: 280px;
+    --text-main: #1a202c;
+    --text-muted: #718096;
+    --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    --white: #ffffff;
+}
+* {
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+/* ==========================================================================
+   SIDEBAR, LOGO & NÚT TRỞ VỀ - Copyright © 2026 Nguyen Manh Tuan.
+========================================================================== */
+.sidebar {
+    background: var(--white);
+    border-right: 1px solid #e2e8f0;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.02);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: fixed;
+    transition: var(--transition-smooth);
+    width: var(--sidebar-width);
+    z-index: 1100;
+}
+.logo-section {
+    padding: 35px 25px;
+    text-align: center;
+}
+.logo-section h2 {
+    animation: logoShine 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    background: linear-gradient(120deg, #0056b3 0%, #00adef 40%, #ffffff 50%, #00adef 60%, #0056b3 100%);
+    background-clip: text;
+    background-size: 200% auto;
+    cursor: pointer;
+    filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.1));
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.logo-section h2:hover {
+    filter: drop-shadow(0px 0px 12px rgba(0, 173, 239, 0.6));
+    transform: scale(1.05);
+}
+@keyframes logoShine {
+    0% {
+        background-position: 200% center;
+    }
+    100% {
+        background-position: -200% center;
+    }
+}
+.back-btn-container {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    padding: 15px 25px 30px 25px;
+    width: 100%;
+}
+.btn-back-home {
+    align-items: center;
+    background: linear-gradient(135deg, var(--primary-blue), var(--accent-cyan));
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 98, 164, 0.3);
+    color: var(--white);
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    font-weight: 800;
+    gap: 10px;
+    justify-content: center;
+    letter-spacing: 1px;
+    overflow: hidden;
+    padding: 12px 35px;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 100%;
+}
+.btn-back-home::before {
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    content: '';
+    height: 100%;
+    left: -100%;
+    position: absolute;
+    top: 0;
+    transition: all 0.6s;
+    width: 100%;
+}
+.btn-back-home:hover {
+    box-shadow: 0 10px 25px rgba(0, 158, 197, 0.5);
+    color: #fff;
+    scale: 1.05;
+    transform: translateY(-3px);
+}
+.btn-back-home:hover::before {
+    left: 100%;
+}
+.btn-back-home:active {
+    scale: 0.98;
+    transform: translateY(-1px);
+}
+.btn-back-home i {
+    font-size: 16px;
+    transition: transform 0.4s;
+}
+.btn-back-home:hover i {
+    scale: 1.2;
+    transform: rotate(-15deg);
+}
+/* ==========================================================================
+   HỆ THỐNG MENU & SUBMENU - Copyright © 2026 Nguyen Manh Tuan.
+========================================================================== */
+.menu-wrapper {
+    flex-grow: 1;
+    list-style: none;
+    overflow-y: auto;
+    padding: 10px 15px;
+}
+.menu-category {
+    margin-bottom: 8px;
+}
+.menu-trigger {
+    align-items: center;
+    border-radius: var(--radius-item);
+    color: #4a5568;
+    cursor: pointer;
+    display: flex;
+    font-weight: 600;
+    padding: 14px 18px;
+    transition: var(--transition-smooth);
+}
+.menu-trigger i:first-child {
+    color: #a0aec0;
+    font-size: 18px;
+    margin-right: 12px;
+    transition: inherit;
+    width: 28px;
+}
+.menu-trigger .chevron-icon {
+    font-size: 10px;
+    margin-left: auto;
+    opacity: 0.5;
+    transition: transform 0.3s;
+}
+.menu-trigger:hover, .menu-category.active .menu-trigger {
+    background: var(--primary-light);
+    color: var(--primary-color);
+}
+.menu-trigger:hover i:first-child {
+    color: var(--primary-color);
+}
+.menu-category.active .chevron-icon {
+    opacity: 1;
+    transform: rotate(90deg);
+}
+.submenu-list {
+    list-style: none;
+    max-height: 0;
+    overflow: hidden;
+    padding-left: 40px;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.menu-category.active .submenu-list {
+    max-height: 400px;
+    padding-bottom: 12px;
+    padding-top: 8px;
+}
+.submenu-list li {
+    border-radius: 8px;
+    color: #718096;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 10px 15px;
+    position: relative;
+    transition: 0.2s;
+}
+.submenu-list li::before {
+    background: #cbd5e0;
+    border-radius: 50%;
+    content: '';
+    height: 4px;
+    left: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+}
+.submenu-list li:hover {
+    background: #f8fafc;
+    color: var(--primary-color);
+    padding-left: 20px;
+}
+/* ==========================================================================
+   BỐ CỤC CHÍNH & LƯỚI SẢN PHẨM - Copyright © 2026 Nguyen Manh Tuan.
+========================================================================== */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    margin-left: var(--sidebar-width);
+    min-height: 100vh;
+    width: calc(100% - var(--sidebar-width));
+}
+.container-wrapper {
+    padding: 40px 60px;
+}
+.top-promotion-grid {
+    display: grid;
+    gap: 25px;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 45px;
+}
+.promo-card-item {
+    align-items: center;
+    background: var(--white);
+    border-left: 6px solid #e2e8f0;
+    border-radius: 20px;
+    box-shadow: var(--shadow-card);
+    cursor: pointer;
+    display: flex;
+    gap: 20px;
+    padding: 24px;
+    transition: var(--transition-smooth);
+}
+.promo-card-item:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-6px);
+}
+.promo-card-item.v-orange {
+    border-left-color: var(--accent-orange);
+}
+.promo-card-item.v-red {
+    border-left-color: var(--secondary-color);
+}
+.promo-card-item.v-blue {
+    border-left-color: var(--primary-color);
+}
+.promo-card-item i {
+    font-size: 32px;
+}
+.v-orange i {
+    color: var(--accent-orange);
+}
+.v-red i {
+    color: var(--secondary-color);
+}
+.v-blue i {
+    color: var(--primary-color);
+}
+.promo-text h4 {
+    color: var(--text-main);
+    font-size: 17px;
+    font-weight: 800;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+.promo-text p {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 500;
+}
+.navigation-filter {
+    align-items: center;
+    border-bottom: 2px solid #edf2f7;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 35px;
+    padding-bottom: 5px;
+}
+.filter-tabs {
+    display: flex;
+    gap: 40px;
+}
+.tab-trigger {
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 700;
+    padding-bottom: 15px;
+    position: relative;
+    transition: 0.3s;
+}
+.tab-trigger.active {
+    color: var(--primary-color);
+}
+.tab-trigger.active::after {
+    background: var(--primary-color);
+    border-radius: 10px 10px 0 0;
+    bottom: -2px;
+    content: '';
+    height: 4px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+.dropdown-control select {
+    background: var(--white);
+    border: 1.5px solid #e2e8f0;
+    border-radius: 14px;
+    color: #4a5568;
+    cursor: pointer;
+    font-weight: 600;
+    outline: none;
+    padding: 12px 20px;
+    transition: 0.3s;
+}
+.dropdown-control select:hover {
+    border-color: var(--primary-color);
+}
+.food-items-grid {
+    display: grid;
+    gap: 30px 25px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    padding: 20px 0;
+}
+.food-card {
+    background: var(--white);
+    border: 1px solid #f1f2f6;
+    border-radius: var(--radius-main);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.food-card:hover {
+    border-color: rgba(0, 173, 239, 0.3);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-12px);
+}
+.food-card::before {
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+    content: "";
+    height: 100%;
+    left: -100%;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transform: skewX(-25deg);
+    transition: 0.8s;
+    width: 50%;
+    z-index: 5;
+}
+.food-card:hover::before {
+    left: 150%;
+}
+.food-thumbnail {
+    height: 190px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+.food-thumbnail img {
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+    width: 100%;
+}
+.food-card:hover .food-thumbnail img {
+    transform: scale(1.12);
+}
+.status-badge {
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 800;
+    left: 15px;
+    letter-spacing: 0.5px;
+    padding: 6px 14px;
+    position: absolute;
+    text-transform: uppercase;
+    top: 15px;
+    z-index: 10;
+}
+.badge-fav {
+    background: linear-gradient(45deg, #2ed573, #7bed9f);
+}
+.badge-partner {
+    background: linear-gradient(45deg, #00adef, #0072ff);
+}
+.badge-promo {
+    background: linear-gradient(45deg, #ffa502, #ff7f50);
+}
+.badge-hot {
+    background: linear-gradient(45deg, #ff4757, #ff6b81);
+}
+.badge-vvip {
+    background: linear-gradient(135deg, #ffd700, #ff8c00);
+}
+.food-details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px;
+}
+.food-title {
+    color: #2d3436;
+    display: -webkit-box;
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    overflow: hidden;
+    transition: color 0.3s;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;   
+}
+.food-card:hover .food-title {
+    color: var(--primary-blue);
+}
+.food-loc {
+    color: #95a5a6;
+    display: block;
+    font-size: 13px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.price-tag-group {
+    align-items: baseline;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.price-current {
+    color: var(--secondary-color);
+    font-size: 19px;
+    font-weight: 900;
+}
+.price-prev {
+    color: #cbd5e0;
+    font-size: 13px;
+    text-decoration: line-through;
+}
+.meta-info-footer {
+    align-items: center;
+    border-top: 1.5px solid #f7fafc;
+    color: #4a5568;
+    display: flex;
+    font-size: 12px;
+    font-weight: 700;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 18px;
+}
+.meta-rating i {
+    color: var(--accent-orange);
+    margin-right: 4px;
+}
+.meta-time {
+    color: var(--text-muted);
+}
+.food-card-link {
+    color: inherit;
+    display: block;
+    height: 100%;
+    text-decoration: none !important;
+}
+/* ==========================================================================
+   NÚT TẢI THÊM & HỆ THỐNG LOADER - Copyright © 2026 Nguyen Manh Tuan.
+========================================================================== */
+.load-more-section {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 70px 0;
+    width: 100%;
+}
+.load-more-container {
+    align-items: center;
+    clear: both;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 60px 0;
+    padding-bottom: 20px;
+    width: 100%;
+}
+.btn-infinite-load {
+    align-items: center;
+    background-color: var(--white);
+    border: 2px solid var(--primary-color);
+    border-radius: 100px;
+    box-shadow: 0 10px 20px rgba(0, 98, 164, 0.1);
+    color: var(--primary-color);
+    cursor: pointer;
+    display: flex;
+    font-size: 15px;
+    font-weight: 800;
+    gap: 12px;
+    outline: none;
+    overflow: hidden;
+    padding: 18px 75px;
+    position: relative;
+    transition: var(--transition-smooth);
+}
+.btn-infinite-load::before {
+    background: linear-gradient(120deg, transparent, rgba(0, 98, 164, 0.1), transparent);
+    content: '';
+    height: 100%;
+    left: -100%;
+    position: absolute;
+    top: 0;
+    transition: all 0.6s;
+    width: 100%;
+}
+.btn-infinite-load:hover {
+    background: var(--primary-color);
+    box-shadow: var(--shadow-blue);
+    color: var(--white);
+    scale: 1.05;
+    transform: translateY(-3px);
+}
+.btn-infinite-load:hover::before {
+    left: 100%;
+}
+.btn-infinite-load:active {
+    scale: 0.98;
+    transform: scale(0.98);
+}
+#ui-loader-spin {
+    color: var(--primary-color);
+    display: none;
+    font-size: 32px;
+    margin-bottom: 25px;
+}
+/* ==========================================================================
+   HỆ THỐNG FOOTER PREMIUM - Copyright © 2026 Nguyen Manh Tuan.
+========================================================================== */
+.footer-premium {
+    background: var(--white);
+    border-top: 1px solid #edf2f7;
+    padding: 100px 0 50px;
+}
+.footer-content {
+    margin: 0 auto;
+    max-width: 1250px;
+    padding: 0 30px;
+}
+.stats-summary-grid {
+    border-bottom: 1px solid #f1f5f9;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 70px;
+    padding-bottom: 70px;
+    text-align: center;
+}
+.stat-val {
+    color: var(--primary-color);
+    display: block;
+    font-size: 45px;
+    font-weight: 900;
+    letter-spacing: -2px;
+    margin-bottom: 5px;
+}
+.stat-desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 600;
+}
+.footer-links-grid {
+    display: grid;
+    gap: 50px;
+    grid-template-columns: repeat(4, 1fr);
+}
+.footer-col-title {
+    color: #2d3748;
+    font-size: 14px;
+    font-weight: 800;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+.footer-list {
+    list-style: none;
+}
+.footer-list li {
+    margin-bottom: 12px;
+}
+.footer-list a {
+    color: #4a5568;
+    font-size: 14px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+.footer-list a:hover {
+    color: var(--primary-color);
+    padding-left: 5px;
+}
+.registered-box {
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    color: var(--primary-color);
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 800;
+    margin-top: 20px;
+    padding: 6px 15px;
+}
+.copyright-tag {
+    color: #a0aec0;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 80px;
+    text-align: center;
+}
+/* ==========================================================================
+   BỘ NÚT LIÊN HỆ ELITE (FLOATING WIDGET) - Copyright © 2026 Nguyen Manh Tuan.
+========================================================================== */
+.floating-contact {
+    align-items: center;
+    bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    position: fixed;
+    right: 30px;
+    z-index: 9999;
+}
+.promo-pill {
+    align-items: center;
+    animation: float-standard 3s ease-in-out infinite;
+    background: linear-gradient(180deg, #14a44d, #1db954);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    box-shadow: 0 15px 35px rgba(20, 164, 77, 0.3);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: 180px;
+    justify-content: center;
+    overflow: hidden;
+    padding: 15px 5px;
+    position: relative;
+    text-align: center;
+    width: 90px;
+}
+.promo-pill::after {
+    animation: shine-sweep 4s infinite;
+    background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.2), rgba(255,255,255,0));
+    content: '';
+    height: 200%;
+    left: -100%;
+    position: absolute;
+    top: -100%;
+    transform: rotate(45deg);
+    width: 200%;
+}
+.promo-text-top {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+.promo-percent {
+    color: #ffeb3b;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    font-size: 32px;
+    font-weight: 900;
+    margin: 8px 0;
+}
+.promo-text-bottom {
+    font-size: 11px;
+    font-weight: 700;
+    opacity: 0.9;
+}
+.contact-item {
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.contact-item::before {
+    animation: pulse-ring 2s infinite;
+    border-radius: 50%;
+    bottom: 0;
+    content: '';
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+}
+.messenger-circle, .zalo-circle {
+    align-items: center;
+    border-radius: 50%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    display: flex;
+    height: 60px;
+    justify-content: center;
+    text-decoration: none;
+    width: 60px;
+}
+.messenger-circle {
+    background: linear-gradient(135deg, #0084ff, #00c6ff);
+}
+.messenger-circle::before {
+    background: rgba(0, 132, 255, 0.4);
+}
+.zalo-circle {
+    background: linear-gradient(135deg, #0068ff, #00afff);
+}
+.zalo-circle::before {
+    background: rgba(0, 104, 255, 0.4);
+}
+.contact-item i {
+    color: white;
+    font-size: 28px;
+}
+.contact-item img {
+    height: 32px;
+    width: 32px;
+}
+.contact-item:hover {
+    scale: 1.15;
+    transform: translateY(-5px);
+}
+/* ==========================================================================
+   HỆ THỐNG RESPONSIVE ĐA THIẾT BỊ - Copyright © 2026 Nguyen Manh Tuan.
+========================================================================== */
+@keyframes float-standard {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-12px);
+    }
+}
+@keyframes shine-sweep {
+    0% {
+        left: -100%;
+        top: -100%;
+    }
+    20%, 100% {
+        left: 100%;
+        top: 100%;
+    }
+}
+@keyframes pulse-ring {
+    0% {
+        opacity: 1;
+        scale: 0.9;
+    }
+    100% {
+        opacity: 0;
+        scale: 1.6;
+    }
+}
+@media (max-width: 1450px) {
+    .food-items-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media (max-width: 1150px) {
+    .food-items-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+@media (max-width: 768px) {
+    .container-wrapper {
+        padding: 30px 20px;
+    }
+    .food-items-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .top-promotion-grid {
+        grid-template-columns: 1fr;
+    }
+    .stats-summary-grid {
+        gap: 30px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .footer-links-grid {
+        gap: 30px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

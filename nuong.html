@@ -1,0 +1,125 @@
+<!-- /* ==========================================================================                                                                                          
+           Copyright © 2026 Nguyen Manh Tuan. All rights reserved.
+    ======================================================================= */ -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thế Giới Đồ Nướng - UNI FOOD</title>    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Lexend:wght@900&family=Poppins:wght@800&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" /> 
+    <link rel="stylesheet" href="/css/nuong.css"> 
+</head>
+<body>
+    <nav class="sticky-nav">
+        <div class="nav-left-zone">
+            <a href="TrangChu.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i> <span>Trở về Trang chủ</span>
+            </a>
+        </div>
+        <h2 class="page-title-nav">Thế Giới Đồ Nướng</h2>
+        <div class="nav-right-spacer"></div>
+    </nav>
+    <main>
+        <section class="category-hero">
+            <div class="hero-content">
+                <h1>BBQ & GRILL</h1>
+                <p>Khám phá hơn 40+ món nướng hấp dẫn nhất tại khu vực của bạn</p>
+            </div>
+        </section>
+        <div class="container">          
+            <div class="bbq-grid" id="foodGrid"></div>
+            <div class="load-more-container">
+                <button class="btn-load-more" id="loadMoreBtn">
+                    Xem thêm món khác <i class="fa-solid fa-chevron-down" style="margin-left:8px"></i>
+                </button>
+            </div>
+      </div>
+    </main>
+    <footer class="footer-bottom">
+        <p>&copy; Copyright © 2026 Nguyen Manh Tuan. All rights reserved.</p>
+    </footer>
+    <script>
+        const foodNames = [
+            "Gà Nướng Mật Ong", "Sườn Cây Nướng BBQ", "Ba Chỉ Bò Mỹ Sốt", "Hàu Nướng Phô Mai", "Bạch Tuộc Sa Tế",
+            "Xiên Que Tứ Xuyên", "Cá Lóc Nướng Trui", "Chân Gà Quái Thú", "Dẻ Sườn Bò Wagyu", "Tôm Hùm Nướng Bơ",
+            "Mực Nướng Đá", "Bò Cuộn Nấm Kim", "Gà Nướng Lu", "Vịt Quay Bắc Kinh", "Nầm Lợn Nướng",
+            "Ếch Nướng Muối Ớt", "Cá Sapa Nướng Giấy Bạc", "Sò Điệp Mỡ Hành", "Bò Tảng Nướng Đá", "Cánh Gà Sốt Thái",
+            "Sườn Non Sốt Cay", "Lòng Nướng Hàn Quốc", "Bò Lá Lốt", "Nem Nướng Nha Trang", "Khoai Tây Nướng Bacon",
+            "Cá Hồi Nướng Cam", "Gà Tre Nướng Đất", "Heo Rừng Nướng Y", "Chim Cút Quay", "Dồi Sụn Nướng Than",
+            "Bò Nướng Mọi", "Tôm Càng Xanh Nướng", "Cá Kèo Nướng Muối", "Sườn Cừu Kiểu Pháp", "Cua Cà Mau Nướng",
+            "Ốc Hương Nướng Mọi", "Bánh Tráng Nướng Đà Lạt", "Bắp Mỹ Nướng Bơ", "Bò Wagyu A5", "Combo BBQ Gia Đình"
+        ];
+        const imageUrls = [
+            "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=600","https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=600","https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?w=600",
+            "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=600","https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600","https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=600",
+            "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600","https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=600","https://images.unsplash.com/photo-1544025162-d76694265947?w=600",
+            "https://images.unsplash.com/photo-1534797258760-1bd2cc95a5bd?w=600","https://images.unsplash.com/photo-1552611052-33e04de081de?w=600","https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=600",
+            "https://images.unsplash.com/photo-1600891964092-4316c288032e?w=600","https://images.unsplash.com/photo-1524182576066-1bb979e25342?w=600","https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?w=600",
+            "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600","https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600","https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=600",
+            "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600","https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=600","https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=600",
+            "https://images.unsplash.com/photo-1534797258760-1bd2cc95a5bd?w=600","https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600","https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=600",
+            "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=600","https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=600","https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?w=600",
+            "https://images.unsplash.com/photo-1534797258760-1bd2cc95a5bd?w=600","https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=600","https://images.unsplash.com/photo-1544025162-d76694265947?w=600",
+            "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=600","https://images.unsplash.com/photo-1534797258760-1bd2cc95a5bd?w=600","https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=600",
+            "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=600","https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=600","https://images.unsplash.com/photo-1534797258760-1bd2cc95a5bd?w=600",
+            "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=600","https://images.unsplash.com/photo-1512152272829-e3139592d56f?w=600","https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=600",
+            "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600"
+        ];
+        const addresses = ["Q.1, TP.HCM", "Q.10, TP.HCM", "Gò Vấp, TP.HCM", "Q.3, TP.HCM", "Bình Thạnh, TP.HCM", "Q.7, TP.HCM", "Thủ Đức, TP.HCM", "Q.5, TP.HCM", "Phú Nhuận, TP.HCM", "Tân Bình, TP.HCM"];
+        function randomPrice() { return Math.floor(Math.random() * (50 - 5 + 1) + 5) * 10000; }
+        let allFoods = [];
+        for (let i = 0; i < 40; i++) {
+            let price = randomPrice();
+            allFoods.push({
+                id: i, name: foodNames[i], address: addresses[i % addresses.length], price: price, oldPrice: price + 25000,
+                rating: (Math.random() * (5.0 - 4.0) + 4.0).toFixed(1), distance: (Math.random() * 5).toFixed(1), time: Math.floor(Math.random() * 40 + 15), img: imageUrls[i] 
+            });
+        }
+        const grid = document.getElementById('foodGrid');
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        let itemsToShow = 12; let itemsAdded = 0;
+        function renderItems(count) {
+            const nextBatch = itemsAdded + count;       
+            for (let i = itemsAdded; i < nextBatch && i < allFoods.length; i++) {
+                const item = allFoods[i];
+                const priceFmt = item.price.toLocaleString('vi-VN');
+                const oldPriceFmt = item.oldPrice.toLocaleString('vi-VN');
+                const html = `
+                <a href="#" class="pro-card">
+                    <div class="pro-card-img">
+                        <span class="tag-partner">PARTNER</span>
+                        <img src="${item.img}" alt="${item.name}" loading="lazy">
+                    </div>
+                    <div class="pro-card-body">
+                        <h3 class="pro-title">${item.name}</h3>
+                        <p class="pro-address">${item.address}</p>                      
+                        <div class="pro-price-row">
+                            <span class="current-price">${priceFmt}đ</span>
+                            <span class="old-price">${oldPriceFmt}đ</span>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="pro-stats">
+                            <span class="stat-item"><i class="fa-solid fa-star icon-star"></i> ${item.rating}</span>
+                            <span class="stat-dot"></span>
+                            <span class="stat-item">${item.distance}km</span>
+                            <span class="stat-dot"></span>
+                            <span class="stat-item">${item.time} phút</span>
+                        </div>
+                    </div>
+                </a>`;
+                grid.insertAdjacentHTML('beforeend', html);
+            }
+            itemsAdded = nextBatch;
+            if (itemsAdded >= allFoods.length) { loadMoreBtn.style.display = 'none'; }
+        }
+        renderItems(itemsToShow);
+        loadMoreBtn.addEventListener('click', function() {
+            const originalText = loadMoreBtn.innerHTML;
+            loadMoreBtn.innerHTML = 'Đang tải... <i class="fa-solid fa-spinner fa-spin"></i>';
+            setTimeout(() => { renderItems(8); loadMoreBtn.innerHTML = originalText; }, 500);
+        });
+    </script>
+</body>
+</html>

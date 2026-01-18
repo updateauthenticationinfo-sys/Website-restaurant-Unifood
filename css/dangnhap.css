@@ -1,0 +1,418 @@
+                         /* ==========================================================================                                                                                          
+                                       Copyright © 2026 Nguyen Manh Tuan. All rights reserved.
+                            ======================================================================= */
+
+:root {
+    --primary: #0070bb;
+    --primary-dark: #005a96;
+    --secondary: #ff4757;
+    --accent: #ffa502;
+    --dark: #1e272e;
+    --light: #f1f2f6;
+    --white: #ffffff;
+    --glass: rgba(255, 255, 255, 0.85);
+    --shadow-hard: 0 20px 50px rgba(0, 31, 63, 0.15);
+    --radius-lg: 30px;
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+
+/* ==========================================================================
+   || NỀN VÀ BỐ CỤC CHÍNH (BODY & LAYOUT) - Copyright © 2026 Nguyen Manh Tuan. 
+   ========================================================================== */
+
+body {
+    font-family: 'Lexend', sans-serif;
+    background: linear-gradient(rgba(0, 112, 187, 0.1), rgba(0, 31, 63, 0.1)), 
+    url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.back-home {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    text-decoration: none;
+    color: var(--white);
+    /* Đổi sang Gradient giống nút Login */
+    background: linear-gradient(135deg, var(--primary-blue), var(--accent-cyan));
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 800; /* Làm đậm chữ hơn */
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 100;
+    overflow: hidden; /* Quan trọng để ẩn vệt sáng chạy quá giới hạn nút */
+    
+    /* Đổ bóng hiện đại */
+    box-shadow: 0 4px 15px rgba(0, 98, 164, 0.3);
+    /* Chuyển động mượt kiểu đàn hồi */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Tạo hiệu ứng tia chớp/bóng lướt qua khi hover */
+.back-home::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg, 
+        transparent, 
+        rgba(0, 124, 241, 0.4), 
+        transparent
+    );
+    transition: all 0.6s;
+}
+
+.back-home:hover {
+    /* Bay lên nhẹ và to ra một chút */
+    transform: translateY(-3px) scale(1.05);
+    /* Đổ bóng mạnh hơn khi hover */
+    box-shadow: 0 10px 25px rgba(0, 158, 197, 0.5);
+    color: #fff;
+}
+
+/* Kích hoạt vệt sáng chạy qua khi hover */
+.back-home:hover::before {
+    left: 100%;
+}
+
+/* Hiệu ứng nhấn nút (lún xuống) */
+.back-home:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+/* Hiệu ứng cho Icon bên trong nút (nếu có thẻ <i>) */
+.back-home i {
+    font-size: 16px;
+    transition: transform 0.4s;
+}
+
+.back-home:hover i {
+    /* Icon xoay nhẹ hoặc di chuyển để tạo sự chú ý */
+    transform: translateX(-3px) scale(1.2);
+}
+
+/* ==========================================================================
+   || KHUNG ĐĂNG NHẬP (LOGIN CONTAINER) - Copyright © 2026 Nguyen Manh Tuan. 
+   ========================================================================== */
+.logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(
+        110deg, 
+        #0056b3 35%, 
+        #ffffff 45%, 
+        #ffffff 55%, 
+        #0056b3 65%
+    );
+    background-size: 200% auto;    
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.15));
+    animation: metallicShine 3s linear infinite;
+}
+.logo i {
+    font-size: 32px;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+@keyframes metallicShine {
+    0% {
+        background-position: -100% center;
+    }
+    100% {
+        background-position: 100% center;
+    }
+}
+.logo-subtitle {
+    font-size: 12px;
+    color: #555;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+.login-container {
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-hard);
+    width: 100%;
+    max-width: 480px;
+    padding: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+.login-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.logo-subtitle {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.login-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--dark);
+    margin-top: 25px;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+.login-subtitle {
+    font-size: 14px;
+    color: #777;
+}
+
+/* ==========================================================================
+   || TRƯỜNG NHẬP LIỆU (FORM GROUPS & INPUTS) - Copyright © 2026 Nguyen Manh Tuan. 
+   ========================================================================== */
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 10px;
+    padding-left: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid transparent;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 15px;
+    font-size: 15px;
+    font-family: 'Lexend', sans-serif;
+    color: var(--dark);
+    transition: var(--transition);
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    background: var(--white);
+    border-color: var(--primary);
+    box-shadow: 0 10px 20px rgba(0, 112, 187, 0.1);
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+.form-row a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.form-row a:hover {
+    color: var(--secondary);
+}
+
+
+/* ==========================================================================
+   || HỆ THỐNG NÚT BẤM (ACTION BUTTONS) - Copyright © 2026 Nguyen Manh Tuan. 
+   ========================================================================== */
+
+.btn-login {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 10px 25px rgba(0, 112, 187, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-login:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0, 112, 187, 0.4);
+    filter: brightness(1.1);
+}
+
+.btn-elite-login {
+    width: 100%;
+    height: 60px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+    background: var(--brand-blue);
+    color: var(--white);
+    border: none;
+    border-radius: 100px;     
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px; 
+    padding-bottom: 2px; 
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 10px 25px rgba(0, 98, 164, 0.3);
+}
+
+.btn-elite-login:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0, 98, 164, 0.4);
+    filter: brightness(1.1);
+}
+
+
+/* ==========================================================================
+   || ĐĂNG NHẬP MẠNG XÃ HỘI (SOCIAL LOGIN) - Copyright © 2026 Nguyen Manh Tuan. 
+   ========================================================================== */
+
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 35px 0;
+    gap: 15px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #aaa;
+    text-transform: uppercase;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.social-login {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.btn-social {
+    flex: 1;
+    padding: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: var(--white);
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--dark);
+}
+
+.btn-social:hover {
+    background: var(--light);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.btn-social i.fa-google { color: #ea4335; }
+.btn-social i.fa-phone { color: #34b7f1; }
+
+
+/* ==========================================================================
+   || LIÊN KẾT ĐĂNG KÝ & PHẢN HỒI (SIGNUP & RESPONSIVE) - Copyright © 2026. 
+   ========================================================================== */
+
+.signup-link {
+    text-align: center;
+    font-size: 15px;
+    color: #666;
+    font-weight: 500;
+}
+
+.signup-link a {
+    color: var(--secondary);
+    font-weight: 800;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 580px) {
+    .login-container {
+        padding: 40px 25px;
+    }
+    .login-title {
+        font-size: 24px;
+    }
+    .social-login {
+        flex-direction: column;
+    }
+    .back-home {
+        top: 15px;
+        right: 15px;
+        padding: 8px 15px;
+        font-size: 12px;
+    }
+}
